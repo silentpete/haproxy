@@ -1,0 +1,32 @@
+version: "2"
+services:
+  my-haproxy:
+    image: my-haproxy:latest
+    container_name: my-haproxy
+    hostname: my-haproxy
+    ports:
+      - 8000:80
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+
+  httpd1:
+    image: httpd:alpine
+    container_name: s1
+    hostname: s1
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+  httpd2:
+    image: httpd:alpine
+    container_name: s2
+    hostname: s2
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
